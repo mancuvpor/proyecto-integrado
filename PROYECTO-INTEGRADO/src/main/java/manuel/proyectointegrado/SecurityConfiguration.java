@@ -33,7 +33,7 @@ public class SecurityConfiguration {
     }
 
     /*
-     * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER
+     * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER PITO
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
