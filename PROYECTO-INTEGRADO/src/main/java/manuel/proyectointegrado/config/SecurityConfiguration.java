@@ -7,8 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import manuel.proyectointegrado.services.JPAUserDetailsService;
 
@@ -22,13 +20,15 @@ public class SecurityConfiguration {
     @Autowired
     JPAUserDetailsService userDetailsService;
 
+    PasswordConfig passwordConfig;
+
     @Bean
     public AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(getPasswordEncoder());
+                .passwordEncoder((passwordConfig));
         return authenticationManagerBuilder.build();
     }
 
@@ -56,12 +56,6 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    /*
-     * ESTABLECEMOS EL PASSWORD ENCODER. FUERZA 15 (de 4 a 31)
-     */
-    @Bean
-    public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder(15);
-    }
+
 
 }
