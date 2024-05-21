@@ -1,4 +1,4 @@
-package manuel.proyectointegrado;
+package manuel.proyectointegrado.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +33,7 @@ public class SecurityConfiguration {
     }
 
     /*
-     * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER PITO
+     * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER
      */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

@@ -1,7 +1,8 @@
-package manuel.proyectointegrado.services;
+package manuel.proyectointegrado.services.impl;
 
 import manuel.proyectointegrado.models.Usuario;
 import manuel.proyectointegrado.repositories.UsuarioRepository;
+import manuel.proyectointegrado.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

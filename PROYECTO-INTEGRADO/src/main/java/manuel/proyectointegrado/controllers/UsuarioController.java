@@ -1,7 +1,7 @@
 package manuel.proyectointegrado.controllers;
 
 import manuel.proyectointegrado.models.Usuario;
-import manuel.proyectointegrado.services.UsuarioServiceImpl;
+import manuel.proyectointegrado.services.impl.UsuarioServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +23,14 @@ public class UsuarioController {
     @Autowired
     UsuarioServiceImpl usuarioService;
 
+
     @GetMapping("/")
     public String usuarios(Model model) {
         List<Usuario> usuarios = usuarioService.getAllUsuarios();
         model.addAttribute("usuarios", usuarios);
         return "usuarios";
     }
+
 
     @GetMapping("/delete")
     public String usuariosBorrar(@RequestParam(required = false, name = "codigo") String codigo, Model model) {
