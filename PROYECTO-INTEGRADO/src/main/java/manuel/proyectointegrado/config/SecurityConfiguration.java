@@ -1,61 +1,37 @@
 package manuel.proyectointegrado.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import manuel.proyectointegrado.config.jwt.JwtAuthFilter;
+import manuel.proyectointegrado.config.jwt.UserAuthProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import manuel.proyectointegrado.services.JPAUserDetailsService;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 
+//Clase global de Security para el permiso de los endpoints, usuarios, etc...
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    @Autowired
-    JPAUserDetailsService userDetailsService;
-
-    PasswordConfig passwordConfig;
+    private final UserAuthEntryPoint userAuthEntryPoint;
+    private final UserAuthProvider userAuthProvider;
 
     @Bean
-    public AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
-                .passwordEncoder((passwordConfig));
-        return authenticationManagerBuilder.build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/api/v0/auth/**").permitAll()
+                        .anyRequest().authenticated())
+                .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
+                .exceptionHandling(customizer -> customizer.authenticationEntryPoint(userAuthEntryPoint))
+                .build();
     }
-
-    /*
-     * MÉTODO PARA ESTABLECER AUTORIZACION - A QUÉ PUEDO ACCEDER
-     */
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        /* URL con información sobre ANT MATCHERS
-         * https://www.baeldung.com/spring-security-expressions */
-        http.authorizeHttpRequests(
-                        authz ->
-                                authz
-                                        .requestMatchers("/", "/img/*")
-                                        .permitAll()
-                                        .requestMatchers("/departments", "/asignaturas/*", "/departments/*")
-                                        .hasRole("ADMIN")
-                                        .requestMatchers("/about", "/services", "/alumnos/*")
-                                        .hasRole("USER")
-                                        .requestMatchers("/register")
-                                        .anonymous())
-                .formLogin(withDefaults())
-                .httpBasic(withDefaults());
-        return http.build();
-    }
-
-
-
 }
