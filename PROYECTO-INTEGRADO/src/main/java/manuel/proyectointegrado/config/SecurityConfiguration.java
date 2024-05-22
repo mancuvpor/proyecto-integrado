@@ -12,8 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 
 //Clase global de Security para el permiso de los endpoints, usuarios, etc...
 @RequiredArgsConstructor
