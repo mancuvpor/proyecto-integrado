@@ -28,4 +28,5 @@ public class UsuarioDTO implements Serializable {
         admin, consumidor, ofertante
     }
 
+    private String token;
 }

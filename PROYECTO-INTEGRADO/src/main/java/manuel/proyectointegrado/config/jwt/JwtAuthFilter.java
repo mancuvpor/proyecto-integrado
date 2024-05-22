@@ -23,9 +23,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (request.getServletPath().matches("/api/v0/auth/login|/api/v0/auth/register")) {
             filterChain.doFilter(request, response);
         } else {
+            //Obtenemos el header AUTHORIZATION (recibirá como Bearer token)
             String header = request.getHeader(HttpHeaders.AUTHORIZATION);
 
             if (header != null) {
+                //authElements --> Array que contiene el Bearer y el token divididos por un espacio generado por la función SPLIT
                 String[] authElements = header.split(" ");
 
                 if (authElements.length == 2 && "Bearer".equals(authElements[0])) {

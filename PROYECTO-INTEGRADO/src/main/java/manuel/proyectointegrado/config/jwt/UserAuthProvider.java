@@ -22,11 +22,10 @@ import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
+//Clase que contiene todas las funcionalidades de los tokens
 public class UserAuthProvider {
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
-
-    private final UsuarioService userService;
 
 
     @PostConstruct
@@ -35,7 +34,7 @@ public class UserAuthProvider {
     }
 
 
-    //Función que se encarga de crear el token
+    //Función que se encarga de crear el token (cada token es nuevo, indiferentemente que te registres o te logees)
     public String createToken(UsuarioDTO user) {
         Date fecha_hoy = new Date();
 
@@ -66,25 +65,5 @@ public class UserAuthProvider {
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
-
-
-    //Función que se encarga de extraer el usuario del token
-    public String extractUsernameFromToken(String token) {
-        try {
-            String[] authElements = token.split(" ");
-
-            if (authElements.length == 2
-                    && "Bearer".equals(authElements[0])) {
-
-                Algorithm algorithm = Algorithm.HMAC256(secretKey);
-                JWTVerifier verifier = JWT.require(algorithm).build();
-                DecodedJWT decoded = verifier.verify(authElements[1]);
-                return decoded.getSubject();
-            }
-
-            return null;
-        } catch (Exception e) {
-            throw new AppException("Error extracting the username from the token", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+    
 }
