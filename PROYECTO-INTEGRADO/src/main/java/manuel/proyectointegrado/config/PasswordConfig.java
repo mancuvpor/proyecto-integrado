@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+//Encriptador de contraseñas (anteriormente ubicado en la clase SecurityConfiguration)
 public class PasswordConfig {
 
     /*

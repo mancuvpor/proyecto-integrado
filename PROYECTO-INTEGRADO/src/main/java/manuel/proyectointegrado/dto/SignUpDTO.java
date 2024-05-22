@@ -1,4 +1,5 @@
 package manuel.proyectointegrado.dto;
 
-public record SignUpDTO(String username, char[] password, String email, String nombre, String apellidos) {
+//DTO del registro
+public record SignUpDTO(String nombre_usuario, String nombre, String apellidos, String sexo, String correo_electronico, char[] contrasena, String tipo_usuario) {
 }

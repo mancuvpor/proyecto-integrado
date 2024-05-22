@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 
+//Excepción personalizada
 @Getter
 public class AppException extends RuntimeException {
 

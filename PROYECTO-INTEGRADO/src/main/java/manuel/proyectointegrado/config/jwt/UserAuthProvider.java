@@ -40,7 +40,7 @@ public class UserAuthProvider {
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()
-                .withSubject(user.getNombre_usuario())
+                .withSubject(user.getUsername())
                 .withIssuedAt(fecha_hoy)
                 .withClaim("nombre", user.getNombre())
                 .withClaim("apellidos", user.getApellidos())
@@ -58,12 +58,12 @@ public class UserAuthProvider {
         DecodedJWT decoded = verifier.verify(token);
 
         UsuarioDTO user = UsuarioDTO.builder()
-                .nombre_usuario(decoded.getSubject())
+                .username(decoded.getSubject())
                 .nombre(decoded.getClaim("nombre").asString())
                 .apellidos(decoded.getClaim("apellidos").asString())
                 .build();
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
-    
+
 }

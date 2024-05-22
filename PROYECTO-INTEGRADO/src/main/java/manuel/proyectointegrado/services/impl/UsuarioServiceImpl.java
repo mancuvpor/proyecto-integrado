@@ -45,42 +45,42 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDTO findUsuariosByUsername(String username) {
         Usuario user = usuarioRepository.findUsuariosByUsername(username)
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new AppException("Usuario no encontrado", HttpStatus.NOT_FOUND));
         return usuarioMapper.toUserDto(user);
     }
 
     @Override
     public UsuarioDTO login(CredentialsDTO credentialsDTO) {
 
-        Usuario user = usuarioRepository.findUsuariosByUsername(credentialsDTO.username())
-                .orElseThrow(() -> new AppException("Unknown User", HttpStatus.NOT_FOUND));
+        Usuario user = usuarioRepository.findUsuariosByUsername(credentialsDTO.nombre_usuario())
+                .orElseThrow(() -> new AppException("Usuario no encontrado", HttpStatus.NOT_FOUND));
 
-        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.password()),
+        if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.contrasena()),
                 user.getContrasena())) {
             return usuarioMapper.toUserDto(user);
         }
 
-        throw new AppException("Invalid Password", HttpStatus.BAD_REQUEST);
+        throw new AppException("Contraseña inválida", HttpStatus.BAD_REQUEST);
     }
 
     @Override
     public UsuarioDTO register(SignUpDTO signUpDTO) {
-        if (StringUtils.isBlank(signUpDTO.username()) || StringUtils.isBlank(Arrays.toString(signUpDTO.password())) || StringUtils.isBlank(signUpDTO.email()) || StringUtils.isBlank(signUpDTO.nombre()) || StringUtils.isBlank(signUpDTO.apellidos())) {
-            throw new AppException("Username, password, email, name and surname are required", HttpStatus.BAD_REQUEST);
+        if (StringUtils.isBlank(signUpDTO.nombre_usuario()) || StringUtils.isBlank(signUpDTO.nombre()) || StringUtils.isBlank(signUpDTO.apellidos()) || StringUtils.isBlank(signUpDTO.sexo()) || StringUtils.isBlank(signUpDTO.correo_electronico()) || StringUtils.isBlank(Arrays.toString(signUpDTO.contrasena())) || StringUtils.isBlank(signUpDTO.tipo_usuario())) {
+            throw new AppException("Nombre de usuario, nombre, apellidos, sexo, correo electrónico, contraseña y tipo de usuario son obligatorios ", HttpStatus.BAD_REQUEST);
         }
 
-        Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(signUpDTO.username());
+        Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(signUpDTO.nombre_usuario());
         if (optionalUserByUsername.isPresent()) {
-            throw new AppException("Username already exists", HttpStatus.BAD_REQUEST);
+            throw new AppException("Nombre de usuario existente ", HttpStatus.BAD_REQUEST);
         }
 
-        Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(signUpDTO.email());
+        Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(signUpDTO.correo_electronico());
         if (optionalUserByEmail.isPresent()) {
-            throw new AppException("Email already exists", HttpStatus.BAD_REQUEST);
+            throw new AppException("Correo electronico existente ", HttpStatus.BAD_REQUEST);
         }
 
         Usuario user = usuarioMapper.signUpToUser(signUpDTO);
-        user.setContrasena(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.password())));
+        user.setContrasena(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.contrasena())));
 
         Usuario savedUser = usuarioRepository.save(user);
 

@@ -10,10 +10,11 @@ import java.io.Serializable;
 @Setter
 @Builder
 @Data
-public class UsuarioDTO implements Serializable {
+//Las clases DTO son "copias" de las clases MODELOS, pero son manejables (por ejemplo, pueden haber atributos que no hay en los modelos)
+public class UsuarioDTO {
 
     private int id;
-    private String nombre_usuario;
+    private String username;
     private String nombre;
     private String apellidos;
 
@@ -21,7 +22,7 @@ public class UsuarioDTO implements Serializable {
         H, M
     }
 
-    private String correo_electronico;
+    private String email;
     private String contrasena;
 
     private enum tipo_usuario {

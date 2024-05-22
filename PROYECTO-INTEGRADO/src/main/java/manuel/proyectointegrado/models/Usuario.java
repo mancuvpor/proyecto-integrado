@@ -32,7 +32,7 @@ public class Usuario {
     private String apellidos;
 
     @Column(name = "sexo")
-    private Object sexo;
+    private String sexo;
 
     @Column(name = "correo_electronico")
     private String email;
@@ -41,7 +41,7 @@ public class Usuario {
     private String contrasena;
 
     @Column(name = "tipo_usuario")
-    private Object tipo_usuario;
+    private String tipo_usuario;
 
     @Override
     public boolean equals(Object o) {
