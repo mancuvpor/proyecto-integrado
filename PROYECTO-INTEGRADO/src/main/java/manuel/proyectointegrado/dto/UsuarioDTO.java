@@ -2,7 +2,6 @@ package manuel.proyectointegrado.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor

@@ -10,10 +10,12 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface UsuarioMapper {
 
+
     UsuarioDTO toUserDto(Usuario user);
 
     @Mapping(target = "contrasena", ignore = true)
     Usuario signUpToUser(SignUpDTO signUpDto);
 
     Usuario toUser(UsuarioDTO userDto);
+
 }

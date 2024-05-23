@@ -3,7 +3,9 @@ package manuel.proyectointegrado.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -22,7 +24,7 @@ public class Usuario {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "nombre_usuario")
+    @Column(name = "username")
     private String username;
 
     @Column(name = "nombre")
@@ -34,7 +36,7 @@ public class Usuario {
     @Column(name = "sexo")
     private String sexo;
 
-    @Column(name = "correo_electronico")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "contrasena")
@@ -42,6 +44,11 @@ public class Usuario {
 
     @Column(name = "tipo_usuario")
     private String tipo_usuario;
+
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Evento> eventosUsuario = new HashSet<>();
+
 
     @Override
     public boolean equals(Object o) {

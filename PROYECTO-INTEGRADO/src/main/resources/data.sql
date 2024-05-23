@@ -21,15 +21,15 @@ DROP TABLE IF EXISTS `usuario`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
                             `id` int(20) NOT NULL AUTO_INCREMENT,
-                            `nombre_usuario` varchar(200) NOT NULL,
+                            `username` varchar(200) NOT NULL,
                             `nombre` varchar(200) NOT NULL,
                             `apellidos` varchar(200) NOT NULL,
                             `sexo` enum('H','M') NOT NULL,
-                            `correo_electronico` varchar(200) NOT NULL,
+                            `email` varchar(200) NOT NULL,
                             `contrasena` varchar(200) NOT NULL,
                             `tipo_usuario` enum('admin','ofertante','consumidor') NOT NULL,
                             PRIMARY KEY (`id`),
-                            UNIQUE KEY `UK_kfsp0s1tflm1cwlj8idhqsad0` (`nombre_usuario`)
+                            UNIQUE KEY `UK_kfsp0s1tflm1cwlj8idhqsad0` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

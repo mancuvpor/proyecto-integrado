@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioImpl implements UsuarioService {
 
 
     private final UsuarioRepository usuarioRepository;
@@ -29,7 +29,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioMapper usuarioMapper;
 
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, UsuarioMapper usuarioMapper) {
+    public UsuarioImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
         this.usuarioMapper = usuarioMapper;
@@ -52,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public UsuarioDTO login(CredentialsDTO credentialsDTO) {
 
-        Usuario user = usuarioRepository.findUsuariosByUsername(credentialsDTO.nombre_usuario())
+        Usuario user = usuarioRepository.findUsuariosByUsername(credentialsDTO.username())
                 .orElseThrow(() -> new AppException("Usuario no encontrado", HttpStatus.NOT_FOUND));
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDTO.contrasena()),
@@ -65,18 +65,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDTO register(SignUpDTO signUpDTO) {
-        if (StringUtils.isBlank(signUpDTO.nombre_usuario()) || StringUtils.isBlank(signUpDTO.nombre()) || StringUtils.isBlank(signUpDTO.apellidos()) || StringUtils.isBlank(signUpDTO.sexo()) || StringUtils.isBlank(signUpDTO.correo_electronico()) || StringUtils.isBlank(Arrays.toString(signUpDTO.contrasena())) || StringUtils.isBlank(signUpDTO.tipo_usuario())) {
-            throw new AppException("Nombre de usuario, nombre, apellidos, sexo, correo electrónico, contraseña y tipo de usuario son obligatorios ", HttpStatus.BAD_REQUEST);
+        if (StringUtils.isBlank(signUpDTO.username()) || StringUtils.isBlank(signUpDTO.nombre()) || StringUtils.isBlank(signUpDTO.apellidos()) || StringUtils.isBlank(signUpDTO.sexo()) || StringUtils.isBlank(signUpDTO.email()) || StringUtils.isBlank(Arrays.toString(signUpDTO.contrasena())) || StringUtils.isBlank(signUpDTO.tipo_usuario())) {
+            throw new AppException("Username, nombre, apellidos, sexo, email, contraseña y tipo de usuario son obligatorios ", HttpStatus.BAD_REQUEST);
         }
 
-        Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(signUpDTO.nombre_usuario());
+        Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(signUpDTO.username());
         if (optionalUserByUsername.isPresent()) {
             throw new AppException("Nombre de usuario existente ", HttpStatus.BAD_REQUEST);
         }
 
-        Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(signUpDTO.correo_electronico());
+        Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(signUpDTO.email());
         if (optionalUserByEmail.isPresent()) {
-            throw new AppException("Correo electronico existente ", HttpStatus.BAD_REQUEST);
+            throw new AppException("Email existente ", HttpStatus.BAD_REQUEST);
         }
 
         Usuario user = usuarioMapper.signUpToUser(signUpDTO);
