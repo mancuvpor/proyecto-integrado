@@ -49,7 +49,7 @@ public class Evento {
     private double precio;
 
     @ManyToOne
-    @JoinColumn(name = "creadorId")
+    @JoinColumn(name = "creador_id")
     @JsonIgnore
     private Usuario usuario;
 
