@@ -17,16 +17,12 @@ public class UsuarioDTO {
     private String nombre;
     private String apellidos;
 
-    private enum sexo {
-        H, M
-    }
+    private String sexo;
 
     private String email;
     private String contrasena;
 
-    private enum tipo_usuario {
-        admin, consumidor, ofertante
-    }
+    private String tipo_usuario;
 
     private String token;
 }

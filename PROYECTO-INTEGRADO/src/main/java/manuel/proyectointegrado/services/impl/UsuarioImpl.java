@@ -17,6 +17,8 @@ import java.nio.CharBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UsuarioImpl implements UsuarioService {
@@ -79,11 +81,24 @@ public class UsuarioImpl implements UsuarioService {
             throw new AppException("Email existente ", HttpStatus.BAD_REQUEST);
         }
 
+        if (!isValidEmail(signUpDTO.email())){
+            throw new AppException("Email no válido ", HttpStatus.BAD_REQUEST);
+        }
+
         Usuario user = usuarioMapper.signUpToUser(signUpDTO);
         user.setContrasena(passwordEncoder.encode(CharBuffer.wrap(signUpDTO.contrasena())));
 
         Usuario savedUser = usuarioRepository.save(user);
 
         return usuarioMapper.toUserDto(savedUser);
+    }
+
+    public static boolean isValidEmail(String email) {
+        String EMAIL_REGEX =
+                "^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$";
+
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }

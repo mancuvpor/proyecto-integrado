@@ -44,6 +44,5 @@ public class EventoController {
         String mensaje = eventoService.deleteEvento(id);
         return ResponseEntity.ok(new ApiResponse(mensaje));
     }
-
-
+    
 }
