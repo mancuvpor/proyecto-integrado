@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Allison&display=swap");
+
+footer {
+    background-color: #222222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10rem;
+}
+
+@media only screen and (max-width: 991.5px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+}
+
+.company-lettering {
+    font-family: "Allison", cursive;
+    font-size: 5rem;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+}
+
+.links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+a {
+    text-decoration: none;
+    transition: text-decoration 0.2s ease-in;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}

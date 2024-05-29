@@ -1,0 +1,27 @@
+<div id="formLogin" class="formLogin">
+    <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onLogin()">
+        <legend>Inicio de Sesión</legend>
+        <div>
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" class="form-control" required [(ngModel)]="login.username" name="username"
+                #username="ngModel" />
+            <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                El nombre de usuario es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" class="form-control" required [(ngModel)]="login.contrasena"
+                name="contrasena" #contrasena="ngModel" />
+            <div [hidden]="contrasena.valid || contrasena.pristine" class="alert alert-danger">
+                La contraseña es obligatoria
+            </div>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" role="button">Iniciar
+                Sesión</button>
+            <a class="btn btn-primary" routerLink="/register" role="button">Crear Sesión</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,74 @@
+<div id="formRegister" class="formRegister">
+    <form class="form-horizontal" #registerForm="ngForm" (ngSubmit)="onRegister()">
+        <legend>Crear Sesión</legend>
+        <div>
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" class="form-control" required [(ngModel)]="register.username"
+                name="username" #username="ngModel" />
+            <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+                El nombre de usuario es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-control" required [(ngModel)]="register.nombre" name="nombre"
+                #nombre="ngModel" />
+            <div [hidden]="nombre.valid || nombre.pristine" class="alert alert-danger">
+                El nombre es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" class="form-control" required [(ngModel)]="register.apellidos"
+                name="apellidos" #apellidos="ngModel" />
+            <div [hidden]="apellidos.valid || apellidos.pristine" class="alert alert-danger">
+                Los apellidos son obligatorios
+            </div>
+        </div>
+        <div>
+            <label for="sexo">Sexo</label>
+            <select id="sexo" class="form-control" required [(ngModel)]="register.sexo" name="sexo" #sexo="ngModel">
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="H">H</option>
+                <option value="M">M</option>
+            </select>
+            <div [hidden]="sexo.valid || sexo.pristine" class="alert alert-danger">
+                El sexo es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" class="form-control" required [(ngModel)]="register.email" name="email"
+                #email="ngModel" />
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                El correo electrónico es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="contrasena">Contraseña</label>
+            <input type="password" id="contrasena" class="form-control" required [(ngModel)]="register.contrasena"
+                name="contrasena" #contrasena="ngModel" />
+            <div [hidden]="contrasena.valid || contrasena.pristine" class="alert alert-danger">
+                La contraseña es obligatoria
+            </div>
+        </div>
+        <div>
+            <label for="tipo_usuario">Tipo de usuario</label>
+            <select id="tipo_usuario" class="form-control" required [(ngModel)]="register.tipo_usuario"
+                name="tipo_usuario" #tipo_usuario="ngModel">
+                <option value="" disabled selected>Seleccione...</option>
+                <option value="consumidor">Consumidor</option>
+                <option value="ofertante">Ofertante</option>
+            </select>
+            <div [hidden]="tipo_usuario.valid || tipo_usuario.pristine" class="alert alert-danger">
+                El tipo de usuario es obligatorio
+            </div>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" role="button">Crear
+                Sesión</button>
+            <a class="btn btn-primary" routerLink="/login" role="button">Cancelar</a>
+        </div>
+    </form>
+</div>
