@@ -1,14 +1,17 @@
 <!-- Contenedor principal -->
 <div class="w-100 min-vh-100 bg-white p-4">
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraLateral"
+    <button id="boton_menu" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraLateral"
         aria-controls="barraLateral">
         <i class="bi bi-list"></i>
     </button>
 
     <!-- MENU CENTRAL -->
     <div>
-        <div class="row justify-content-center px-4 m-0">
-            @for (e of listaEventos; track $index) {
+
+        @if (mostrarEventosPersonales) {
+
+        <div class="row justify-content-center px-4 m-0" id="eventos_personales">
+            @for (e of listaEventosPersonales; track $index) {
             <div class="card bg-white shadow mx-2 mb-3 p-0 col-lg-3 col-md-4 col-sm-6 col-12">
                 <div class="card-header">
                     <h5>{{ e.titulo }}</h5>
@@ -36,6 +39,61 @@
             </div>
             }
         </div>
+        }
+
+        @if(mostrarEventosTotales){
+
+        <div class="row justify-content-center px-4 m-0" id="eventos_todos">
+            @for (e of listaEventos; track $index) {
+            <div class="card bg-white shadow mx-2 mb-3 p-0 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card-header">
+                    <h5>{{ e.titulo }}</h5>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="card-title">
+                        <div class="card-text">
+                            {{ e.descripcion }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="fw-bold">
+                        {{e.precio | number}}€
+                    </div>
+                    <div>
+                        <button class="btn icon-btn p-0 mx-2" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modal' + $index"><i class="bi bi-eye"></i></button>
+                        @if(this.authService.getTokenDescodificado().tipo_usuario == "admin"){
+                        <button class="btn icon-btn text-dark p-0 mx-2" routerLink="/editar-evento/{{ e.idEvento }}">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn icon-btn text-dark p-0 mx-2" (click)="borrarEvento(e)">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                        }
+                    </div>
+                </div>
+
+                <div class="modal fade" [id]="'modal' + $index" tabindex="-1" aria-labelledby="modalEvento"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body rounded">
+                                <h2 class="text-center">{{ e.titulo | uppercase }}</h2>
+                                <p>{{ e.descripcion }}</p>
+                                <p><b>Invitados:</b> {{ e.invitados }}</p>
+                                <p><b>Fecha:</b> {{ e.fecha | date}}</p>
+                                <p><b>Lugar:</b> {{ e.lugar }}</p>
+                                <p><b>Precio:</b> {{ e.precio | number}}€</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
 
         <div class="anadir_evento">
             <a routerLink="/anadir-evento">
@@ -47,13 +105,15 @@
     <!-- MENU LATERAL -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="barraLateral" aria-labelledby="barraLateralLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="barraLateralLabel">Offcanvas</h5>
+            <h5 class="offcanvas-title" id="barraLateralLabel">Menú de Eventify</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div>
-                <div>Tus eventos</div>
-                <div>Ver todos los eventos</div>
+                <div type="button" [ngClass]="{'menu_activo':mostrarEventosPersonales, 'menu_inactivo':!mostrarEventosPersonales}"
+                    (click)="mostrarEventos('ver_eventos_personales')">Tus eventos</div>
+                <div type="button" [ngClass]="{'menu_activo':mostrarEventosTotales, 'menu_inactivo':!mostrarEventosTotales}"
+                    (click)="mostrarEventos('ver_todos_eventos')">Ver todos los eventos</div>
             </div>
         </div>
     </div>

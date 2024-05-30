@@ -36,7 +36,6 @@ export class FormEventosComponent {
         next: res => {
           console.log(res);
           this.evento = res
-          // this.evento.creador_id = this.authService.getTokenDescodificado().id;
         },
         error: error => console.log(error)
       })

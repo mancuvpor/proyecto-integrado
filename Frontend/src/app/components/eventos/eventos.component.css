@@ -44,3 +44,19 @@
     color: #ff0022;
     /* Color del icono al pasar el cursor */
 }
+
+.menu_activo {
+    font-weight: bold;
+    border-bottom: 0.25rem solid #fb2f4a;
+    padding: 1rem;
+    background-color: rgb(255, 190, 190);
+}
+
+.menu_inactivo {
+    padding: 1rem;
+}
+
+#boton_menu {
+    background-color: #ff3e57;
+    border: 0
+}

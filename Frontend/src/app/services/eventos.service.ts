@@ -17,6 +17,10 @@ export class EventosService {
     return this.http.get<any>(this.url + "eventos");
   }
 
+  getEventosPersonales() {
+    return this.http.get<any>(this.url + "eventos/personales");
+  }
+
   crearEventos(evento: Evento) {
     console.log("Estamos en crear eventos");
     console.log(evento)

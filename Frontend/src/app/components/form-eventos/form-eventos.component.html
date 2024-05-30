@@ -58,14 +58,15 @@
                 El precio es obligatorio
             </div>
         </div>
-        <!-- <div>
-            <label for="creador_id">Creador ID</label>
-            <input type="text" id="creador_id" class="form-control" required [(ngModel)]="evento.creador_id"
-                name="creador_id" #creador_id="ngModel" />
-            <div [hidden]="creador_id.valid || creador_id.pristine" class="alert alert-danger">
-                La creador_id es obligatoria
+        <div>
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" class="form-control" required
+                [(ngModel)]="evento.telefono" name="telefono" #telefono="ngModel" />
+            <div [hidden]="telefono.valid || telefono.pristine" class="alert alert-danger">
+                El telefono es obligatorio
             </div>
-        </div> -->
+        </div>
+        <br />
         <div>
             <button class="btn btn-primary" type="submit" role="button">{{textoBoton}}</button>
             <a class="btn btn-primary" routerLink="/eventos" role="button">Cancelar</a>

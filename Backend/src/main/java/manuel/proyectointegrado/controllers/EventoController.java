@@ -1,10 +1,12 @@
 package manuel.proyectointegrado.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import manuel.proyectointegrado.dto.EventoDTO;
 import manuel.proyectointegrado.models.Evento;
 import manuel.proyectointegrado.services.EventoService;
 import manuel.proyectointegrado.utils.ApiResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,12 @@ public class EventoController {
     @GetMapping
     public ResponseEntity<List<Evento>> listarEventos() {
         return ResponseEntity.ok(eventoService.getAllEventos());
+    }
+
+    @GetMapping("/personales")
+    public ResponseEntity<List<Evento>> getEventosPersonales(HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        return ResponseEntity.ok(eventoService.getAllEventosPersonales(token));
     }
 
     @GetMapping("/{id}")

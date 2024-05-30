@@ -11,6 +11,8 @@ public interface EventoService {
 
     List<Evento> getAllEventos();
 
+    List<Evento> getAllEventosPersonales(String token);
+
     Evento createEvento(EventoDTO evento);
 
     Optional<Evento> getEventoById(int id);

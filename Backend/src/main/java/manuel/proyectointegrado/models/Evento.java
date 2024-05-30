@@ -49,21 +49,23 @@ public class Evento {
     @Column(name = "precio", precision = 12, scale = 2)
     private double precio;
 
+    @Column(name = "telefono")
+    private String telefono;
+
     @ManyToOne
     @JoinColumn(name = "creador_id")
     @JsonIgnore
     private Usuario usuario;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Evento evento)) return false;
-        return idEvento == evento.idEvento && Double.compare(precio, evento.precio) == 0 && Objects.equals(titulo, evento.titulo) && Objects.equals(fecha, evento.fecha) && Objects.equals(hora, evento.hora) && Objects.equals(lugar, evento.lugar) && Objects.equals(descripcion, evento.descripcion) && Objects.equals(invitados, evento.invitados) && Objects.equals(usuario, evento.usuario);
+        return idEvento == evento.idEvento && Double.compare(precio, evento.precio) == 0 && Objects.equals(titulo, evento.titulo) && Objects.equals(fecha, evento.fecha) && Objects.equals(hora, evento.hora) && Objects.equals(lugar, evento.lugar) && Objects.equals(descripcion, evento.descripcion) && Objects.equals(invitados, evento.invitados) && Objects.equals(telefono, evento.telefono) && Objects.equals(usuario, evento.usuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idEvento, titulo, fecha, hora, lugar, descripcion, invitados, precio, usuario);
+        return Objects.hash(idEvento, titulo, fecha, hora, lugar, descripcion, invitados, precio, telefono, usuario);
     }
 }
