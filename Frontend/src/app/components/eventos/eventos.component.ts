@@ -32,7 +32,7 @@ export class EventosComponent {
   }
 
   borrarEvento(eventoBorrar: Evento) {
-    console.log(this.evento.idEvento, "Estamos en borrar de eventos.component");
+    console.log(eventoBorrar.idEvento, "Estamos en borrar de eventos.component");
     if (confirm("¿Seguro que desea eliminar el evento: " + eventoBorrar.titulo + "?")) {
       this.eventoService.borrarEventos(eventoBorrar.idEvento).subscribe({
         next: res => { this.getAllEventos() },

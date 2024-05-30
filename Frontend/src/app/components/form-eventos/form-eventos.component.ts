@@ -46,6 +46,7 @@ export class FormEventosComponent {
   onSubmit(evento: Evento) {
     console.log("Formulario enviado " + evento);
     if (this.evento.idEvento == null) {
+      evento.creador_id = this.authService.getTokenDescodificado().id;
       this.eventoService.crearEventos(evento).subscribe({
         next: (res) => {
           this.toastr.success("Evento creado correctamente", "Evento registrado")

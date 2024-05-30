@@ -22,3 +22,25 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
 }
+
+/* Posicionamiento del icono de añadir evento */
+.anadir_evento {
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    margin: 1rem;
+    text-align: right;
+}
+
+.anadir_evento a {
+    font-size: 3rem;
+    /* Tamaño del icono */
+    color: #fb2f4a;
+    /* Color del icono */
+}
+
+.anadir_evento a:hover {
+    color: #ff0022;
+    /* Color del icono al pasar el cursor */
+}

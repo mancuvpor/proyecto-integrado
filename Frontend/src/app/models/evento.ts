@@ -10,5 +10,5 @@ export interface Evento {
     descripcion: string,
     invitados: string,
     precio: number,
-    // creador_id: number
+    creador_id: number
 }

@@ -9,6 +9,8 @@ import manuel.proyectointegrado.repositories.EventoRepository;
 import manuel.proyectointegrado.repositories.UsuarioRepository;
 import manuel.proyectointegrado.services.EventoService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +36,8 @@ public class EventoImpl implements EventoService {
     public List<Evento> getAllEventos() {
         return eventoRepository.findAll();
     }
+
+    
 
     @Override
     public Evento createEvento(EventoDTO evento) {

@@ -1,47 +1,11 @@
-<!-- <h2>EVENTOS</h2>
-
-<table class="table table-striped" border="1">
-    <thead>
-        <tr>
-            <th>TITULO</th>
-            <th>FECHA</th>
-            <th>HORA</th>
-            <th>LUGAR</th>
-            <th>DESCRIPCIÓN</th>
-            <th>INVITADOS</th>
-            <th>PRECIO</th>
-            <th>CREADOR EVENTO</th>
-            <th>EDITAR</th>
-            <th>BORRAR</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (e of listaEventos; track $index) {
-        <tr>
-            <td>{{e.titulo}}</td>
-            <td>{{e.fecha | date}}</td>
-            <td>{{e.hora}}</td>
-            <td>{{e.lugar}}</td>
-            <td>{{e.descripcion}}</td>
-            <td>{{e.invitados}}</td>
-            <td>{{e.precio | number}}</td>
-            <td>{{e.creador_id | number}}</td>
-            <td><a class="btn btn-warning" routerLink='/anadir-evento/{{e.idEvento}}' role="button"><i
-                        class="bi bi-pencil-square"></i></a></td>
-            <td><button class="btn btn-danger" (click)="borrarEvento(e)" type="button">Borrar</button></td>
-        </tr>
-        }
-    </tbody>
-</table> -->
-
-
-
+<!-- Contenedor principal -->
 <div class="w-100 min-vh-100 bg-white p-4">
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraLateral"
         aria-controls="barraLateral">
         <i class="bi bi-list"></i>
     </button>
 
+    <!-- MENU CENTRAL -->
     <div>
         <div class="row justify-content-center px-4 m-0">
             @for (e of listaEventos; track $index) {
@@ -73,17 +37,24 @@
             }
         </div>
 
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="barraLateral" aria-labelledby="barraLateralLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="barraLateralLabel">Offcanvas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    <div>Tus eventos</div>
-                    <div>Ver todos los eventos</div>
-                </div>
+        <div class="anadir_evento">
+            <a routerLink="/anadir-evento">
+                <i class="bi bi-plus-circle-fill"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- MENU LATERAL -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="barraLateral" aria-labelledby="barraLateralLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="barraLateralLabel">Offcanvas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                <div>Tus eventos</div>
+                <div>Ver todos los eventos</div>
             </div>
         </div>
-        <!-- <a class="btn btn-primary" routerLink='/admin/' role="button">Zona de Administrador</a>
-<a class="btn btn-primary" routerLink='/usuarios/' role="button">Configuración de usuarios</a> -->
+    </div>
+</div>

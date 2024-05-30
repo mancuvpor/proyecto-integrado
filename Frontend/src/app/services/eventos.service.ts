@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Evento } from '../models/evento';
+import { log } from 'node:console';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class EventosService {
 
   crearEventos(evento: Evento) {
     console.log("Estamos en crear eventos");
+    console.log(evento)
     return this.http.post<any>(this.url + "eventos", evento);
   }
 

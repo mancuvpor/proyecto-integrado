@@ -1,35 +1,48 @@
 package manuel.proyectointegrado.controllers;
 
 
-//@Controller
-//@RequestMapping("/usuarios")
-//public class UsuarioController {
-//
-//    static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
-//
-//    @Autowired
-//    UsuarioServiceImpl usuarioService;
-//
-//
-//    @GetMapping("/")
-//    public String usuarios(Model model) {
-//        List<Usuario> usuarios = usuarioService.getAllUsuarios();
-//        model.addAttribute("usuarios", usuarios);
-//        return "usuarios";
+import lombok.RequiredArgsConstructor;
+import manuel.proyectointegrado.dto.UsuarioDTO;
+import manuel.proyectointegrado.models.Usuario;
+import manuel.proyectointegrado.services.UsuarioService;
+import manuel.proyectointegrado.utils.ApiResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/api/v0/usuarios")
+public class UsuarioController {
+
+    private final UsuarioService usuarioService;
+
+    @GetMapping
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        return ResponseEntity.ok(usuarioService.getAllUsuarios());
+    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Optional<Usuario>> buscarUsuarioPorId(@PathVariable int id) {
+//        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
 //    }
 //
-//
-//    @GetMapping("/delete")
-//    public String usuariosBorrar(@RequestParam(required = false, name = "codigo") String codigo, Model model) {
-//
-//        logger.info("prueba");
-//
-//        Usuario usuarioEntity = usuarioService.findUsuariosById(Integer.parseInt(codigo)).get();
-//        int usuarioID = usuarioEntity.getId();
-//
-////            usu.setDepartamento(null);
-////            usuarioService.deleteUsuariosById(usuarioID);
-//
-//        return "redirect:/usuarios/?codigo=" + usuarioID;
+//    @PostMapping
+//    public ResponseEntity<Usuario> insertarUsuario(@RequestBody UsuarioDTO usuario) {
+//        Usuario nuevoEvento = usuarioService.createUsuario(usuario);
+//        return ResponseEntity.ok(nuevoEvento);
 //    }
-//}
+//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<Usuario> actualizarEvento(@PathVariable int id, @RequestBody UsuarioDTO usuario) {
+//        return ResponseEntity.ok(usuarioService.updateUsuario(id, usuario));
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<ApiResponse> eliminarUsuario(@PathVariable int id) {
+//        String mensaje = usuarioService.deleteUsuario(id);
+//        return ResponseEntity.ok(new ApiResponse(mensaje));
+//    }
+}
