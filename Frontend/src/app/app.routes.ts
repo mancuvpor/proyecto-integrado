@@ -3,11 +3,13 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { EventosComponent } from './components/eventos/eventos.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { FormEventosComponent } from './components/form-eventos/form-eventos.component';
 import { authGuard } from './guards/auth.guard';
+import { FormUsuariosComponent } from './components/form-usuarios/form-usuarios.component';
 
 export const routes: Routes = [
+
+    //AUTHORIZATION
     {
         path: 'login',
         component: LoginComponent
@@ -16,19 +18,28 @@ export const routes: Routes = [
         path: 'register',
         component: RegisterComponent
     },
+
+    //USUARIOS
     {
         path: 'usuarios',
         component: UsuariosComponent,
         canActivate: [authGuard]
     },
     {
-        path: 'eventos',
-        component: EventosComponent,
+        path: 'anadir-usuario',
+        component: FormUsuariosComponent,
         canActivate: [authGuard]
     },
     {
-        path: 'admin',
-        component: AdminComponent,
+        path: 'editar-usuario/:id',
+        component: FormUsuariosComponent,
+        canActivate: [authGuard]
+    },
+
+    //EVENTOS
+    {
+        path: 'eventos',
+        component: EventosComponent,
         canActivate: [authGuard]
     },
     {
@@ -37,9 +48,16 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'editar-evento/:id',
+        component: FormEventosComponent,
+        canActivate: [authGuard]
+    },
+
+    //RUTA PREDETERMINADA
+    {
         path: '**',
         redirectTo: '/eventos',
         pathMatch: 'full',
     }
-    
+
 ];

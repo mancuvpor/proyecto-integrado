@@ -1,1 +1,74 @@
-<p>form-eventos works!</p>
+<div id="formEvento" class="formEvento">
+    <form class="form-horizontal" #eventoForm="ngForm" (ngSubmit)="onSubmit(eventoForm.value)">
+        <legend>{{textoBoton}} evento</legend>
+        <div>
+            <label for="titulo">Nombre</label>
+            <input type="text" id="titulo" class="form-control" required [(ngModel)]="evento.titulo" name="titulo"
+                #titulo="ngModel" />
+            <div [hidden]="titulo.valid || titulo.pristine" class="alert alert-danger">
+                El título es obligatorio
+            </div>
+        </div>
+
+        <div>
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" class="form-control" required [(ngModel)]="evento.fecha" name="fecha"
+                #fecha="ngModel" />
+            <div [hidden]="fecha.valid || fecha.pristine" class="alert alert-danger">
+                La fecha es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="hora">Hora</label>
+            <input type="time" id="hora" class="form-control" required [(ngModel)]="evento.hora" name="hora"
+                #hora="ngModel" />
+            <div [hidden]="hora.valid || hora.pristine" class="alert alert-danger">
+                La hora es obligatoria
+            </div>
+        </div>
+        <div>
+            <label for="lugar">Lugar</label>
+            <input type="text" id="lugar" class="form-control" required [(ngModel)]="evento.lugar" name="lugar"
+                #lugar="ngModel" />
+            <div [hidden]="lugar.valid || lugar.pristine" class="alert alert-danger">
+                El lugar es obligatorio
+            </div>
+        </div>
+        <div>
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" class="form-control" required [(ngModel)]="evento.descripcion"
+                name="descripcion" #descripcion="ngModel" />
+            <div [hidden]="descripcion.valid || descripcion.pristine" class="alert alert-danger">
+                La descripcion es obligatoria
+            </div>
+        </div>
+        <div>
+            <label for="invitados">Invitados</label>
+            <input type="text" id="invitados" class="form-control" required [(ngModel)]="evento.invitados"
+                name="invitados" #invitados="ngModel" />
+            <div [hidden]="invitados.valid || invitados.pristine" class="alert alert-danger">
+                Los invitados son obligatorios
+            </div>
+        </div>
+        <div>
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" class="form-control" required [(ngModel)]="evento.precio" name="precio"
+                #precio="ngModel" />
+            <div [hidden]="precio.valid || precio.pristine" class="alert alert-danger">
+                El precio es obligatorio
+            </div>
+        </div>
+        <!-- <div>
+            <label for="creador_id">Creador ID</label>
+            <input type="text" id="creador_id" class="form-control" required [(ngModel)]="evento.creador_id"
+                name="creador_id" #creador_id="ngModel" />
+            <div [hidden]="creador_id.valid || creador_id.pristine" class="alert alert-danger">
+                La creador_id es obligatoria
+            </div>
+        </div> -->
+        <div>
+            <button class="btn btn-primary" type="submit" role="button">{{textoBoton}}</button>
+            <a class="btn btn-primary" routerLink="/eventos" role="button">Cancelar</a>
+        </div>
+    </form>
+</div>

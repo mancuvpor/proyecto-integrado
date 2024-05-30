@@ -45,6 +45,7 @@ public class UserAuthProvider {
                 .withClaim("nombre", user.getNombre())
                 .withClaim("apellidos", user.getApellidos())
                 .withClaim("tipo_usuario", user.getTipo_usuario())
+                .withClaim("id", user.getId())
                 .sign(algorithm);
     }
 
@@ -63,6 +64,7 @@ public class UserAuthProvider {
                 .nombre(decoded.getClaim("nombre").asString())
                 .apellidos(decoded.getClaim("apellidos").asString())
                 .tipo_usuario(decoded.getClaim("tipo_usuario").asString())
+                .id(decoded.getClaim("id").asInt())
                 .build();
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());

@@ -29,7 +29,7 @@ export class RegisterComponent {
         console.log(res)
         localStorage.setItem('token', res.token);
         this.toastr.success("Usuario creado correctamente", "Usuario registrado")
-        return this.ruta.navigate(['/login']);
+        return this.ruta.navigate(['/eventos']);
       },
       error: error => {
         this.toastr.error(error.error.message, "ERROR")

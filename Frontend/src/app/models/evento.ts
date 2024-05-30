@@ -4,11 +4,11 @@ export interface Evento {
 
     idEvento: number,
     titulo: string,
-    fecha: Date,
+    fecha: string,
     hora: Time,
     lugar: string,
     descripcion: string,
     invitados: string,
     precio: number,
-    creador_id: number
+    // creador_id: number
 }

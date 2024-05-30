@@ -1,4 +1,4 @@
-<h2>EVENTOS</h2>
+<!-- <h2>EVENTOS</h2>
 
 <table class="table table-striped" border="1">
     <thead>
@@ -32,11 +32,58 @@
         </tr>
         }
     </tbody>
-</table>
+</table> -->
 
-<!-- <button type="button" class="btn btn-primary" (click)="irNuevoUModificarOwner()">Añadir Owner</button> -->
 
-<a class="btn btn-primary" routerLink='/admin/' role="button">Zona de Administrador</a>
-<a class="btn btn-primary" routerLink='/usuarios/' role="button">Configuración de usuarios</a>
-<!-- <button type="button" class="btn btn-primary" (click)="irNuevoUModificarPet()">Añadir Mascosta</button> -->
-<!-- <a class="btn btn-primary" routerLink="/" role="button">Cancelar</a> -->
+
+<div class="w-100 min-vh-100 bg-white p-4">
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#barraLateral"
+        aria-controls="barraLateral">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <div>
+        <div class="row justify-content-center px-4 m-0">
+            @for (e of listaEventos; track $index) {
+            <div class="card bg-white shadow mx-2 mb-3 p-0 col-lg-3 col-md-4 col-sm-6 col-12">
+                <div class="card-header">
+                    <h5>{{ e.titulo }}</h5>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="card-title">
+                        <div class="card-text">
+                            {{ e.descripcion }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <div class="fw-bold">
+                        {{e.precio | number}}€
+                    </div>
+                    <div>
+                        <button class="btn icon-btn text-dark p-0 mx-1" routerLink="/editar-evento/{{ e.idEvento }}">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <button class="btn icon-btn text-dark p-0 mx-1" (click)="borrarEvento(e)">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="barraLateral" aria-labelledby="barraLateralLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="barraLateralLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div>
+                    <div>Tus eventos</div>
+                    <div>Ver todos los eventos</div>
+                </div>
+            </div>
+        </div>
+        <!-- <a class="btn btn-primary" routerLink='/admin/' role="button">Zona de Administrador</a>
+<a class="btn btn-primary" routerLink='/usuarios/' role="button">Configuración de usuarios</a> -->

@@ -1,16 +1,20 @@
 package manuel.proyectointegrado.services.impl;
 
 import manuel.proyectointegrado.dto.EventoDTO;
+import manuel.proyectointegrado.exceptions.AppException;
 import manuel.proyectointegrado.mappers.EventoMapper;
 import manuel.proyectointegrado.models.Evento;
 import manuel.proyectointegrado.models.Usuario;
 import manuel.proyectointegrado.repositories.EventoRepository;
 import manuel.proyectointegrado.repositories.UsuarioRepository;
 import manuel.proyectointegrado.services.EventoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class EventoImpl implements EventoService {
@@ -35,6 +39,9 @@ public class EventoImpl implements EventoService {
     public Evento createEvento(EventoDTO evento) {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(evento.creador_id());
         if (optionalUsuario.isPresent()) {
+            if (!isValidPrecio(evento.precio())){
+                throw new AppException("Precio no válido ", HttpStatus.BAD_REQUEST);
+            }
             Usuario usuarioExistente = optionalUsuario.get();
             Evento nuevoEvento = eventoMapper.convertiraEvento(evento);
             nuevoEvento.setUsuario(usuarioExistente);
@@ -51,12 +58,13 @@ public class EventoImpl implements EventoService {
     @Override
     public Evento updateEvento(int id, EventoDTO evento) {
         Optional<Evento> optionalEvento = eventoRepository.findById(id);
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(evento.creador_id());
-        if (optionalEvento.isPresent() && optionalUsuario.isPresent()) {
-            Usuario usuarioExistente = optionalUsuario.get();
+        if (optionalEvento.isPresent()) {
+            if (!isValidPrecio(evento.precio())){
+                throw new AppException("Precio no válido ", HttpStatus.BAD_REQUEST);
+            }
             Evento eventoActualizado = eventoMapper.convertiraEvento(evento);
-            eventoActualizado.setUsuario(usuarioExistente);
             eventoActualizado.setIdEvento(id);
+            eventoActualizado.setUsuario(optionalEvento.get().getUsuario());
             return eventoRepository.save(eventoActualizado);
         }
         return null;
@@ -69,5 +77,15 @@ public class EventoImpl implements EventoService {
             return "Evento con id " + id + " borrado con éxito";
         }
         return "Evento con id " + id + " no encontrado";
+    }
+
+    public static boolean isValidPrecio(double precio) {
+        String PRECIO_REGEX =
+                "^\\d{1,10}(\\.\\d{1,2})?$";
+
+        String precioStr = String.valueOf(precio);
+        Pattern pattern = Pattern.compile(PRECIO_REGEX);
+        Matcher matcher = pattern.matcher(precioStr);
+        return matcher.matches();
     }
 }

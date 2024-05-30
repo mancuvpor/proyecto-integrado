@@ -54,7 +54,6 @@ export class AuthService {
     // Decodifica el token JWT para obtener la información del usuario
     const decodedToken: any = jwt_decode(token);
 
-    console.log(decodedToken)
     // Devuelve el token descodificado del usuario
     return decodedToken || null;
   }

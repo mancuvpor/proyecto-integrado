@@ -1,0 +1,24 @@
+.card {
+    height: 40vh;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2) !important;
+    transition: box-shadow 0.3s ease;
+}
+
+.card-header h5 {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Mantener el texto en una sola línea */
+    white-space: nowrap;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}

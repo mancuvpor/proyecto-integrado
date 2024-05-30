@@ -21,7 +21,6 @@ export class EventosComponent {
 
   constructor(private eventoService: EventosService, private ruta: Router) {
     this.evento = <Evento>{};
-    // console.log(this.pet.owner)
     this.getAllEventos();
   }
 
@@ -32,11 +31,6 @@ export class EventosComponent {
     });
   }
 
-  // ngOnChanges() {
-  //   console.log("estoy en el onchange")
-  //   console.log(this.idCreador)
-  //   if (this.idCreador) {
-
   borrarEvento(eventoBorrar: Evento) {
     console.log(this.evento.idEvento, "Estamos en borrar de eventos.component");
     if (confirm("¿Seguro que desea eliminar el evento: " + eventoBorrar.titulo + "?")) {
@@ -45,9 +39,5 @@ export class EventosComponent {
         error: error => console.log(error)
       });
     }
-  }
-
-  irNuevoUModificarEvento() {
-    this.ruta.navigate(['/anadir-evento/', -1]);
   }
 }

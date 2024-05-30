@@ -2,7 +2,9 @@ package manuel.proyectointegrado.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import lombok.*;
+
 
 import java.util.Date;
 import java.util.Objects;
@@ -28,11 +30,9 @@ public class Evento {
     @Column(name = "titulo")
     private String titulo;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "fecha")
-    private Date fecha;
+    private String fecha;
 
-    @Temporal(TemporalType.TIME)
     @Column(name = "hora")
     private String hora;
 
@@ -45,7 +45,8 @@ public class Evento {
     @Column(name = "invitados")
     private String invitados;
 
-    @Column(name = "precio")
+    @Digits(integer = 10, fraction = 2)
+    @Column(name = "precio", precision = 12, scale = 2)
     private double precio;
 
     @ManyToOne
