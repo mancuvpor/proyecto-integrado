@@ -3,6 +3,7 @@ package manuel.proyectointegrado.services;
 import manuel.proyectointegrado.dto.CredentialsDTO;
 import manuel.proyectointegrado.dto.SignUpDTO;
 import manuel.proyectointegrado.dto.UsuarioDTO;
+import manuel.proyectointegrado.models.Evento;
 import manuel.proyectointegrado.models.Usuario;
 
 import java.util.List;
@@ -19,5 +20,12 @@ public interface UsuarioService {
 
     UsuarioDTO findUsuariosByUsername(String nombre_usuario);
 
+    Optional<Usuario> getUsuarioById(int id);
+
+    Usuario createUsuario(UsuarioDTO usuarioDTO, String token);
+
+    Usuario updateUsuario(int id, UsuarioDTO usuarioDTO, String token);
+
+    String deleteUsuario(int id);
 
 }

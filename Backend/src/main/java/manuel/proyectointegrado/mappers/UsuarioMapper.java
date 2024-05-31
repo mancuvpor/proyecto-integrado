@@ -16,6 +16,6 @@ public interface UsuarioMapper {
     @Mapping(target = "contrasena", ignore = true)
     Usuario signUpToUser(SignUpDTO signUpDto);
 
-    Usuario toUser(UsuarioDTO userDto);
+    Usuario convertirAUsuario(UsuarioDTO userDto);
 
 }

@@ -1,5 +1,6 @@
 package manuel.proyectointegrado.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,6 +47,7 @@ public class Usuario {
     private String tipo_usuario;
 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Evento> eventosUsuario = new HashSet<>();
 

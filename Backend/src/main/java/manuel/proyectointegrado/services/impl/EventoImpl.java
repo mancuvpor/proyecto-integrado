@@ -138,6 +138,6 @@ public class EventoImpl implements EventoService {
     private Usuario getUsuarioFromToken(String token) {
         String username = userAuthProvider.extraerUsuariodelToken(token);
         UsuarioDTO usuarioDTO = usuarioService.findUsuariosByUsername(username);
-        return usuarioMapper.toUser(usuarioDTO);
+        return usuarioMapper.convertirAUsuario(usuarioDTO);
     }
 }

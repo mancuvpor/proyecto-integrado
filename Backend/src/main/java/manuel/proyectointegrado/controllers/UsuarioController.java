@@ -1,11 +1,13 @@
 package manuel.proyectointegrado.controllers;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import manuel.proyectointegrado.dto.UsuarioDTO;
 import manuel.proyectointegrado.models.Usuario;
 import manuel.proyectointegrado.services.UsuarioService;
 import manuel.proyectointegrado.utils.ApiResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,25 +26,27 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.getAllUsuarios());
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Optional<Usuario>> buscarUsuarioPorId(@PathVariable int id) {
-//        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
-//    }
-//
-//    @PostMapping
-//    public ResponseEntity<Usuario> insertarUsuario(@RequestBody UsuarioDTO usuario) {
-//        Usuario nuevoEvento = usuarioService.createUsuario(usuario);
-//        return ResponseEntity.ok(nuevoEvento);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Usuario> actualizarEvento(@PathVariable int id, @RequestBody UsuarioDTO usuario) {
-//        return ResponseEntity.ok(usuarioService.updateUsuario(id, usuario));
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<ApiResponse> eliminarUsuario(@PathVariable int id) {
-//        String mensaje = usuarioService.deleteUsuario(id);
-//        return ResponseEntity.ok(new ApiResponse(mensaje));
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Usuario>> buscarUsuarioPorId(@PathVariable int id) {
+        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Usuario> insertarUsuario(@RequestBody UsuarioDTO usuario, HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        Usuario nuevoUsuario = usuarioService.createUsuario(usuario, token);
+        return ResponseEntity.ok(nuevoUsuario);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Usuario> actualizarUsuario(@PathVariable int id, @RequestBody UsuarioDTO usuario, HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        return ResponseEntity.ok(usuarioService.updateUsuario(id, usuario, token));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse> eliminarUsuario(@PathVariable int id) {
+        String mensaje = usuarioService.deleteUsuario(id);
+        return ResponseEntity.ok(new ApiResponse(mensaje));
+    }
 }
