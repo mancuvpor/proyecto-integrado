@@ -68,7 +68,7 @@ public class EventoImpl implements EventoService {
                 throw new AppException("Precio no válido ", HttpStatus.BAD_REQUEST);
             }
 
-            if(isValidTelefono(evento.telefono())){
+            if(!isValidTelefono(evento.telefono())){
                 throw new AppException("Telefono no valido", HttpStatus.BAD_REQUEST);
             }
 
