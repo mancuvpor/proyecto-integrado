@@ -48,7 +48,7 @@ public class Usuario {
 
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Set<Evento> eventosUsuario = new HashSet<>();
 
 

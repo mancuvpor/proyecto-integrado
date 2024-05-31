@@ -105,11 +105,7 @@ public class UsuarioImpl implements UsuarioService {
         if (optionalUsuario.isPresent()) {
 
             if (!Objects.equals(userAuthProvider.extraerTipoUsuariodelToken(token), "admin")) {
-                throw new AppException("No eres admin ", HttpStatus.BAD_REQUEST);
-            }
-
-            if (!Objects.equals(userAuthProvider.extraerTipoUsuariodelToken(token), "admin")) {
-                if (!Objects.equals(userAuthProvider.extraerUsuariodelToken(token), usuarioDTO.getUsername())) {
+                if (userAuthProvider.extraerIDdelToken(token) != id) {
                     throw new AppException("No puedes editar un usuario que no eres tu ", HttpStatus.BAD_REQUEST);
                 }
             }
@@ -119,12 +115,12 @@ public class UsuarioImpl implements UsuarioService {
             }
 
             Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(usuarioDTO.getUsername());
-            if (optionalUserByUsername.isPresent()) {
+            if (optionalUserByUsername.isPresent() && !Objects.equals(optionalUserByUsername.get().getUsername(), usuarioDTO.getUsername())) {
                 throw new AppException("Nombre de usuario existente ", HttpStatus.BAD_REQUEST);
             }
 
             Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(usuarioDTO.getEmail());
-            if (optionalUserByEmail.isPresent()) {
+            if (optionalUserByEmail.isPresent() && !Objects.equals(optionalUserByEmail.get().getEmail(), usuarioDTO.getEmail())) {
                 throw new AppException("Email existente ", HttpStatus.BAD_REQUEST);
             }
 
@@ -138,14 +134,23 @@ public class UsuarioImpl implements UsuarioService {
 
             Usuario usuarioActualizado = usuarioMapper.convertirAUsuario(usuarioDTO);
             usuarioActualizado.setId(id);
+            usuarioActualizado.setContrasena(passwordEncoder.encode(CharBuffer.wrap(usuarioDTO.getContrasena())));
             return usuarioRepository.save(usuarioActualizado);
         }
         return null;
     }
 
     @Override
-    public String deleteUsuario(int id) {
-        if (usuarioRepository.existsById(id)) {
+    public String deleteUsuario(int id, String token) {
+
+        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+
+        if (usuarioExistente.isPresent()) {
+            if (!Objects.equals(userAuthProvider.extraerTipoUsuariodelToken(token), "admin")) {
+                if (userAuthProvider.extraerIDdelToken(token) != id) {
+                    throw new AppException("No puedes editar un usuario que no eres tu", HttpStatus.BAD_REQUEST);
+                }
+            }
             usuarioRepository.deleteById(id);
             return "Usuario con id " + id + " borrado con éxito";
         }

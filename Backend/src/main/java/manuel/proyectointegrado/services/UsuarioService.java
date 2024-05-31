@@ -26,6 +26,6 @@ public interface UsuarioService {
 
     Usuario updateUsuario(int id, UsuarioDTO usuarioDTO, String token);
 
-    String deleteUsuario(int id);
+    String deleteUsuario(int id, String token);
 
 }

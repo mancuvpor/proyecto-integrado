@@ -45,8 +45,9 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> eliminarUsuario(@PathVariable int id) {
-        String mensaje = usuarioService.deleteUsuario(id);
+    public ResponseEntity<ApiResponse> eliminarUsuario(@PathVariable int id, HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String mensaje = usuarioService.deleteUsuario(id, token);
         return ResponseEntity.ok(new ApiResponse(mensaje));
     }
 }

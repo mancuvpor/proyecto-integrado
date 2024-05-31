@@ -107,4 +107,24 @@ public class UserAuthProvider {
             throw new AppException("Error al extraer el tipo de usuario del token", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public int extraerIDdelToken(String token) {
+        try {
+            String[] authElements = token.split(" ");
+
+            if (authElements.length == 2
+                    && "Bearer".equals(authElements[0])) {
+
+                Algorithm algorithm = Algorithm.HMAC256(secretKey);
+                JWTVerifier verifier = JWT.require(algorithm).build();
+                DecodedJWT decoded = verifier.verify(authElements[1]);
+                return decoded.getClaim("id").asInt();
+            }
+
+            return 0;
+        } catch (Exception e) {
+            throw new AppException("Error al extraer el tipo de usuario del token", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
