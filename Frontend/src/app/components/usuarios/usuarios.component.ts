@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Usuario } from '../../models/usuario';
 import { UsuariosService } from '../../services/usuarios.service';
+import { DecimalPipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, DecimalPipe, UpperCasePipe],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.css'
 })

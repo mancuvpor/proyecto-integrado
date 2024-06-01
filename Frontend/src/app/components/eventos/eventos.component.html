@@ -26,6 +26,7 @@
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <div class="fw-bold">
                         {{e.precio | number}}€
+                        {{e.hora}} {{e.fecha | date}}
                     </div>
                     <div>
                         <button class="btn icon-btn text-dark p-0 mx-1" routerLink="/editar-evento/{{ e.idEvento }}">
@@ -96,11 +97,13 @@
         </div>
         }
 
+        @if(this.authService.getTokenDescodificado().tipo_usuario != "consumidor"){
         <div class="anadir_evento">
             <a routerLink="/anadir-evento">
                 <i class="bi bi-plus-circle-fill"></i>
             </a>
         </div>
+        }
     </div>
 
     <!-- MENU LATERAL -->
@@ -111,12 +114,25 @@
         </div>
         <div class="offcanvas-body">
             <div>
+                @if(this.authService.getTokenDescodificado().tipo_usuario != "consumidor"){
                 <div type="button"
                     [ngClass]="{'menu_activo':mostrarEventosPersonales, 'menu_inactivo':!mostrarEventosPersonales}"
                     (click)="mostrarEventos('ver_eventos_personales')">Tus eventos</div>
+                }
                 <div type="button"
                     [ngClass]="{'menu_activo':mostrarEventosTotales, 'menu_inactivo':!mostrarEventosTotales}"
                     (click)="mostrarEventos('ver_todos_eventos')">Ver todos los eventos</div>
+                <br>
+                <!-- <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button">
+                        <i class="bi bi-person-circle"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a routerLink="/editar-usuario/{{u.id}}">Editar perfil</a>
+                        <a routerLink="/borr">Opción 2</a>
+                        <a href="#option3">Opción 3</a>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

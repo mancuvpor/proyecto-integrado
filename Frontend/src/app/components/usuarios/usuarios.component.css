@@ -1,0 +1,20 @@
+#boton_usuario {
+    border-bottom: 3px rgb(255, 0, 111) solid;
+    border-radius: 0%;
+}
+
+#boton_borrar {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: red;
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}
+
+#boton_editar {
+    background-color: rgb(255, 174, 0);
+    color: white;
+    border: red;
+    padding: 0.4rem;
+    border-radius: 0.2rem;
+}

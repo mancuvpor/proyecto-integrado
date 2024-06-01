@@ -22,7 +22,7 @@
 
         <div>
             <label for="apellidos">Apellidos</label>
-            <input type="date" id="apellidos" class="form-control" required [(ngModel)]="usuario.apellidos"
+            <input type="text" id="apellidos" class="form-control" required [(ngModel)]="usuario.apellidos"
                 name="apellidos" #apellidos="ngModel" />
             <div [hidden]="apellidos.valid || apellidos.pristine" class="alert alert-danger">
                 Los apellidos son obligatorios

@@ -1,6 +1,7 @@
 <div id="formLogin" class="formLogin">
+    <img src="assets/imgs/logo_empresa.png" width="200">
     <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onLogin()">
-        <legend>Inicio de Sesión</legend>
+        <legend>INICIAR SESIÓN</legend>
         <div>
             <label for="username">Nombre de Usuario</label>
             <input type="text" id="username" class="form-control" required [(ngModel)]="login.username" name="username"
@@ -21,6 +22,7 @@
         <div>
             <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" role="button">Iniciar
                 Sesión</button>
+            &nbsp;
             <a class="btn btn-primary" routerLink="/register" role="button">Crear Sesión</a>
         </div>
     </form>
