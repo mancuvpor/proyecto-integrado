@@ -19,7 +19,7 @@ export class FormUsuariosComponent {
   public usuario: Usuario;
   public textoBoton: string;
 
-  constructor(private usuarioService: UsuariosService, private ruta: Router, private ruta_activa: ActivatedRoute, private toastr: ToastrService, private authService: AuthService) {
+  constructor(private usuarioService: UsuariosService, private ruta: Router, private ruta_activa: ActivatedRoute, private toastr: ToastrService, public authService: AuthService) {
 
     this.usuario = <Usuario>{};
     this.textoBoton = "";
@@ -37,6 +37,7 @@ export class FormUsuariosComponent {
         next: res => {
           console.log(res);
           this.usuario = res
+          this.usuario.contrasena = ""
         },
         error: error => console.log(error)
       })
@@ -62,7 +63,10 @@ export class FormUsuariosComponent {
       this.usuarioService.modificarUsuarios(usuario, this.usuario.id).subscribe({
         next: (res) => {
           this.toastr.success("Usuario modificado correctamente", "Usuario modificado")
-          return this.ruta.navigate(['/usuarios']);
+          if (this.authService.getTokenDescodificado().tipo_usuario == "admin") {
+            return this.ruta.navigate(['/usuarios']);
+          }
+          return this.ruta.navigate(['/eventos']);
         },
         error: error => {
           this.toastr.error(error.error.message, "ERROR")

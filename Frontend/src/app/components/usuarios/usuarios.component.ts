@@ -33,7 +33,7 @@ export class UsuariosComponent {
 
   borrarUsuario(usuarioBorrar: Usuario) {
     console.log(this.usuario.id, "Estamos en borrar de usuarios.component");
-    if (confirm("¿Seguro que desea eliminar el evento: " + usuarioBorrar.username + "?")) {
+    if (confirm("¿Seguro que desea eliminar el usuario: " + usuarioBorrar.username + "?")) {
       this.usuarioService.borrarUsuarios(usuarioBorrar.id).subscribe({
         next: res => { this.getAllUsuarios() },
         error: error => console.log(error)

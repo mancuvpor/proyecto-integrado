@@ -59,6 +59,7 @@
             </div>
         </div>
 
+
         <div>
             <label for="tipo_usuario">Tipo de usuario</label>
             <select id="tipo_usuario" class="form-control" required [(ngModel)]="usuario.tipo_usuario"
@@ -76,7 +77,11 @@
         <br />
         <div>
             <button class="btn btn-primary" type="submit" role="button">{{textoBoton}}</button>
+            @if(this.authService.getTokenDescodificado().tipo_usuario == "admin"){
             <a class="btn btn-primary" routerLink="/usuarios" role="button">Cancelar</a>
+            } @else {
+            <a class="btn btn-primary" routerLink="/eventos" role="button">Cancelar</a>
+            }
         </div>
     </form>
 </div>

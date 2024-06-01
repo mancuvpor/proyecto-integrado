@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Login } from '../../models/login';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,9 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
 
   public login: Login;
-  
 
-  constructor(private authService: AuthService, private ruta: Router) {
+
+  constructor(private authService: AuthService, private ruta: Router, private toastr: ToastrService) {
     this.login = <Login>{}
   }
 
@@ -28,7 +29,10 @@ export class LoginComponent {
         localStorage.setItem('token', res.token);
         return this.ruta.navigate(['/dashboard']);
       },
-      error: error => console.log(error)
+      error: error => {
+        this.toastr.error(error.error.message, "ERROR")
+        console.log(error)
+      }
     })
   }
 

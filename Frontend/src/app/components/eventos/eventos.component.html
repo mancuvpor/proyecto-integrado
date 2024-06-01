@@ -123,16 +123,16 @@
                     [ngClass]="{'menu_activo':mostrarEventosTotales, 'menu_inactivo':!mostrarEventosTotales}"
                     (click)="mostrarEventos('ver_todos_eventos')">Ver todos los eventos</div>
                 <br>
-                <!-- <div class="dropdown">
+                <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button">
                         <i class="bi bi-person-circle"></i>
                     </button>
                     <div class="dropdown-content">
-                        <a routerLink="/editar-usuario/{{u.id}}">Editar perfil</a>
-                        <a routerLink="/borr">Opción 2</a>
-                        <a href="#option3">Opción 3</a>
+                        <a routerLink="/editar-usuario/{{authService.getTokenDescodificado().id}}">Editar perfil</a>
+                        <a (click)="borrarUsuario(authService.getTokenDescodificado().id)">Borrar
+                            perfil</a>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
