@@ -115,12 +115,12 @@ public class UsuarioImpl implements UsuarioService {
             }
 
             Optional<Usuario> optionalUserByUsername = usuarioRepository.findUsuariosByUsername(usuarioDTO.getUsername());
-            if (optionalUserByUsername.isPresent() && !Objects.equals(optionalUserByUsername.get().getUsername(), usuarioDTO.getUsername())) {
+            if (optionalUserByUsername.isPresent() && Objects.equals(optionalUserByUsername.get().getUsername(), usuarioDTO.getUsername())) {
                 throw new AppException("Nombre de usuario existente ", HttpStatus.BAD_REQUEST);
             }
 
             Optional<Usuario> optionalUserByEmail = usuarioRepository.findUsuarioByEmail(usuarioDTO.getEmail());
-            if (optionalUserByEmail.isPresent() && !Objects.equals(optionalUserByEmail.get().getEmail(), usuarioDTO.getEmail())) {
+            if (optionalUserByEmail.isPresent() && Objects.equals(optionalUserByEmail.get().getEmail(), usuarioDTO.getEmail())) {
                 throw new AppException("Email existente ", HttpStatus.BAD_REQUEST);
             }
 
