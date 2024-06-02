@@ -1,6 +1,6 @@
 <div id="formEvento" class="formEvento">
     <form class="form-horizontal" #eventoForm="ngForm" (ngSubmit)="onSubmit(eventoForm.value)">
-        <legend>{{textoBoton}} evento</legend>
+        <legend class="fw-bold">{{textoBoton}} EVENTO</legend>
         <div>
             <label for="titulo">Nombre</label>
             <input type="text" id="titulo" class="form-control" required [(ngModel)]="evento.titulo" name="titulo"
@@ -60,16 +60,16 @@
         </div>
         <div>
             <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" class="form-control" required
-                [(ngModel)]="evento.telefono" name="telefono" #telefono="ngModel" />
+            <input type="tel" id="telefono" class="form-control" required [(ngModel)]="evento.telefono" name="telefono"
+                #telefono="ngModel" />
             <div [hidden]="telefono.valid || telefono.pristine" class="alert alert-danger">
                 El telefono es obligatorio
             </div>
         </div>
-        <br />
         <div>
             <button class="btn btn-primary" type="submit" role="button">{{textoBoton}}</button>
-            <a class="btn btn-primary" routerLink="/eventos" role="button">Cancelar</a>
+            &nbsp;
+            <a class="btn btn-primary" routerLink="/eventos" role="button">CANCELAR</a>
         </div>
     </form>
 </div>

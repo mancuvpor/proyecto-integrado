@@ -28,9 +28,9 @@ export class FormEventosComponent {
 
     this.evento.idEvento = this.ruta_activa.snapshot.params["id"];
     if (this.evento.idEvento == null) {
-      this.textoBoton = "Añadir";
+      this.textoBoton = "AÑADIR";
     } else {
-      this.textoBoton = "Modificar";
+      this.textoBoton = "MODIFICAR";
 
       this.eventoService.getEventoPorId(this.evento.idEvento).subscribe({
         next: res => {

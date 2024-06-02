@@ -1,46 +1,54 @@
-<h2>USUARIOS</h2>
-<br />
-<table class="table table-striped" border="1">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>USERNAME</th>
-            <th>NOMBRE</th>
-            <th>APELLIDOS</th>
-            <th>EMAIL</th>
-            <th>TIPO DE USUARIO</th>
-            <th>EDITAR</th>
-            <th>BORRAR</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @for (u of listaUsuarios; track $index) {
-        <tr>
-            <td>{{u.id | number}}</td>
-            <td><button id="boton_usuario" class="btn p-0" data-bs-toggle="modal"
-                    [attr.data-bs-target]="'#modal' + $index">{{u.username}}</button></td>
-            <td>{{u.nombre}}</td>
-            <td>{{u.apellidos}}</td>
-            <td>{{u.email}}</td>
-            <td>{{u.tipo_usuario}}</td>
-            <td><a id="boton_editar" class="btn btn-primary" routerLink='/editar-usuario/{{u.id}}' role="button">Editar</a></td>
-            <td><button id="boton_borrar" (click)="borrarUsuario(u)" type="button">Borrar</button></td>
-        </tr>
-
-        <div class="modal fade" [id]="'modal' + $index" tabindex="-1" aria-labelledby="modalEvento" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body rounded">
-                        <h2 class="text-center">{{ u.username | uppercase }}</h2>
-                        <p><b>Nombre completo:</b> {{ u.nombre }} {{ u.apellidos }}</p>
-                        <p><b>Sexo:</b> {{ u.sexo }}</p>
-                        <p><b>Email:</b> {{ u.email }}</p>
-                        <p><b>Tipo de usuario:</b> {{ u.tipo_usuario }}</p>
+<div class="px-5 py-3">
+    <h2>USUARIOS</h2>
+    <br />
+    <table class="table table-striped" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>USERNAME</th>
+                <th>NOMBRE</th>
+                <th>APELLIDOS</th>
+                <th>EMAIL</th>
+                <th>TIPO DE USUARIO</th>
+                <th>EDITAR</th>
+                <th>BORRAR</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            @for (u of listaUsuarios; track $index) {
+            <tr>
+                <td>{{u.id | number}}</td>
+                <td><button id="boton_usuario" class="btn p-0" data-bs-toggle="modal"
+                        [attr.data-bs-target]="'#modal' + $index">{{u.username}}</button></td>
+                <td>{{u.nombre}}</td>
+                <td>{{u.apellidos}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.tipo_usuario}}</td>
+                <td><a id="boton_editar" class="btn btn-primary" routerLink='/editar-usuario/{{u.id}}'
+                        role="button">Editar</a></td>
+                <td><button id="boton_borrar" (click)="borrarUsuario(u)" type="button">Borrar</button></td>
+            </tr>
+    
+            <div class="modal fade" [id]="'modal' + $index" tabindex="-1" aria-labelledby="modalEvento" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body rounded">
+                            <h2 class="text-center">{{ u.username | uppercase }}</h2>
+                            <p><b>Nombre completo:</b> {{ u.nombre }} {{ u.apellidos }}</p>
+                            <p><b>Sexo:</b> {{ u.sexo }}</p>
+                            <p><b>Email:</b> {{ u.email }}</p>
+                            <p><b>Tipo de usuario:</b> {{ u.tipo_usuario }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+    
+</div>
+
+<div class="icono-anadir-usuario">
+    <i class="bi bi-plus-circle-fill" routerLink="/anadir-usuario"></i>
+</div>

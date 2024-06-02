@@ -1,9 +1,9 @@
-<div id="formLogin" class="formLogin">
+<div class="formLogin">
     <img src="assets/imgs/logo_empresa.png" width="200">
-    <form class="form-horizontal" #loginForm="ngForm" (ngSubmit)="onLogin()">
-        <legend>INICIAR SESIÓN</legend>
+    <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="shadow rounded p-4">
+        <legend class="fw-bold">INICIAR SESIÓN</legend>
         <div>
-            <label for="username">Nombre de Usuario</label>
+            <label for="username" class="form-label">Nombre de Usuario</label>
             <input type="text" id="username" class="form-control" required [(ngModel)]="login.username" name="username"
                 #username="ngModel" />
             <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
@@ -11,19 +11,22 @@
             </div>
         </div>
         <div>
-            <label for="contrasena">Contraseña</label>
+            <label for="contrasena" class="form-label">Contraseña</label>
             <input type="password" id="contrasena" class="form-control" required [(ngModel)]="login.contrasena"
                 name="contrasena" #contrasena="ngModel" />
             <div [hidden]="contrasena.valid || contrasena.pristine" class="alert alert-danger">
                 La contraseña es obligatoria
             </div>
         </div>
-        <br />
-        <div>
-            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" role="button">Iniciar
-                Sesión</button>
-            &nbsp;
-            <a class="btn btn-primary" routerLink="/register" role="button">Crear Sesión</a>
+        <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div>
+                <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" role="button">
+                    Iniciar Sesión
+                </button>
+            </div>
+            <div>
+                <a class="text-white text-decoration-none" routerLink="/register" role="button">¿No tienes una cuenta? Crea una aquí</a>
+            </div>
         </div>
     </form>
 </div>

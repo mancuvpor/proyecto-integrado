@@ -17,7 +17,6 @@ export class LoginComponent {
 
   public login: Login;
 
-
   constructor(private authService: AuthService, private ruta: Router, private toastr: ToastrService) {
     this.login = <Login>{}
   }
@@ -35,8 +34,4 @@ export class LoginComponent {
       }
     })
   }
-
 }
-
-
-

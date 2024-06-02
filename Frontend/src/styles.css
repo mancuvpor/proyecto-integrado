@@ -2,3 +2,8 @@
 
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'ngx-toastr/toastr';
+
+html, body {
+  overflow-x: hidden;
+  padding: 0rem !important;
+}

@@ -18,3 +18,20 @@
     padding: 0.4rem;
     border-radius: 0.2rem;
 }
+
+/* Posicionamiento del icono de añadir usuario */
+.icono-anadir-usuario {
+    font-size: 3rem;
+    color: #fb2f4a;
+    cursor: pointer;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem; 
+    z-index: 1000;
+    margin: 0;
+    text-align: right;
+}
+  
+.icono-anadir-usuario:hover {
+    color: #ff0022;
+}

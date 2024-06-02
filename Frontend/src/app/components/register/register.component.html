@@ -1,8 +1,9 @@
 <div id="formRegister" class="formRegister">
-    <form class="form-horizontal" #registerForm="ngForm" (ngSubmit)="onRegister()">
-        <legend>Crear Sesión</legend>
+    <img src="assets/imgs/logo_empresa.png" width="200">
+    <form #registerForm="ngForm" (ngSubmit)="onRegister()" class="shadow rounded p-4">
+        <legend class="fw-bold">REGISTRO</legend>
         <div>
-            <label for="username">Nombre de Usuario</label>
+            <label for="username" class="form-label">Nombre de Usuario</label>
             <input type="text" id="username" class="form-control" required [(ngModel)]="register.username"
                 name="username" #username="ngModel" />
             <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
@@ -10,7 +11,7 @@
             </div>
         </div>
         <div>
-            <label for="nombre">Nombre</label>
+            <label for="nombre" class="form-label">Nombre</label>
             <input type="text" id="nombre" class="form-control" required [(ngModel)]="register.nombre" name="nombre"
                 #nombre="ngModel" />
             <div [hidden]="nombre.valid || nombre.pristine" class="alert alert-danger">
@@ -18,7 +19,7 @@
             </div>
         </div>
         <div>
-            <label for="apellidos">Apellidos</label>
+            <label for="apellidos" class="form-label">Apellidos</label>
             <input type="text" id="apellidos" class="form-control" required [(ngModel)]="register.apellidos"
                 name="apellidos" #apellidos="ngModel" />
             <div [hidden]="apellidos.valid || apellidos.pristine" class="alert alert-danger">
@@ -26,8 +27,8 @@
             </div>
         </div>
         <div>
-            <label for="sexo">Sexo</label>
-            <select id="sexo" class="form-control" required [(ngModel)]="register.sexo" name="sexo" #sexo="ngModel">
+            <label for="sexo" class="form-label">Sexo</label>
+            <select id="sexo" class="form-select" required [(ngModel)]="register.sexo" name="sexo" #sexo="ngModel">
                 <option value="" disabled selected>Seleccione...</option>
                 <option value="H">H</option>
                 <option value="M">M</option>
@@ -37,7 +38,7 @@
             </div>
         </div>
         <div>
-            <label for="email">Correo electrónico</label>
+            <label for="email" class="form-label">Correo electrónico</label>
             <input type="email" id="email" class="form-control" required [(ngModel)]="register.email" name="email"
                 #email="ngModel" />
             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
@@ -45,7 +46,7 @@
             </div>
         </div>
         <div>
-            <label for="contrasena">Contraseña</label>
+            <label for="contrasena" class="form-label">Contraseña</label>
             <input type="password" id="contrasena" class="form-control" required [(ngModel)]="register.contrasena"
                 name="contrasena" #contrasena="ngModel" />
             <div [hidden]="contrasena.valid || contrasena.pristine" class="alert alert-danger">
@@ -53,8 +54,8 @@
             </div>
         </div>
         <div>
-            <label for="tipo_usuario">Tipo de usuario</label>
-            <select id="tipo_usuario" class="form-control" required [(ngModel)]="register.tipo_usuario"
+            <label for="tipo_usuario" class="form-label">Tipo de usuario</label>
+            <select id="tipo_usuario" class="form-select" required [(ngModel)]="register.tipo_usuario"
                 name="tipo_usuario" #tipo_usuario="ngModel">
                 <option value="" disabled selected>Seleccione...</option>
                 <option value="consumidor">Consumidor</option>
@@ -64,11 +65,15 @@
                 El tipo de usuario es obligatorio
             </div>
         </div>
-        <br />
-        <div>
-            <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" role="button">Crear
-                Sesión</button>
-            <a class="btn btn-primary" routerLink="/login" role="button">Cancelar</a>
+        <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div>
+                <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid" role="button">
+                    Registrarse
+                </button>
+            </div>
+            <div>
+                <a class="btn btn-primary" routerLink="/login" role="button">Cancelar</a>
+            </div>
         </div>
     </form>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Evento } from '../../models/evento';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { EventosService } from '../../services/eventos.service';
 import { CommonModule, DatePipe, DecimalPipe, UpperCasePipe } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -48,10 +48,13 @@ export class EventosComponent {
   }
 
   borrarEvento(eventoBorrar: Evento) {
-    console.log(eventoBorrar.idEvento, "Estamos en borrar de eventos.component");
     if (confirm("¿Seguro que desea eliminar el evento: " + eventoBorrar.titulo + "?")) {
       this.eventoService.borrarEventos(eventoBorrar.idEvento).subscribe({
-        next: res => { this.getAllEventos() },
+        next: res => {
+          this.getAllEventos()
+          this.getEventosPersonales()
+          this.ruta.navigate(["/eventos"])
+        },
         error: error => console.log(error)
       });
     }
@@ -70,7 +73,6 @@ export class EventosComponent {
   }
 
   borrarUsuario(id: number) {
-    console.log(this.usuario.id, "Estamos en borrar de eventos.component");
     if (confirm("¿Seguro que desea eliminar tu usuario?")) {
       this.usuarioService.borrarUsuarios(id).subscribe({
         next: res => {

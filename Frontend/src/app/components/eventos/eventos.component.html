@@ -6,7 +6,7 @@
     </button>
 
     <!-- MENU CENTRAL -->
-    <div>
+    <div class="container container-fluid">
 
         @if (mostrarEventosPersonales) {
 
@@ -25,8 +25,12 @@
                 </div>
                 <div class="card-footer d-flex align-items-center justify-content-between">
                     <div class="fw-bold">
-                        {{e.precio | number}}€
-                        {{e.hora}} {{e.fecha | date}}
+                        <div>
+                            {{e.precio | number}}€
+                        </div>
+                        <div>
+                            {{e.fecha | date}}
+                        </div>
                     </div>
                     <div>
                         <button class="btn icon-btn text-dark p-0 mx-1" routerLink="/editar-evento/{{ e.idEvento }}">
@@ -59,19 +63,31 @@
                 </div>
 
                 <div class="card-footer d-flex align-items-center justify-content-between">
-                    <div class="fw-bold">
-                        {{e.precio | number}}€
+                    <div class="fw-bold d-flex flex-column">
+                        <div>
+                            {{e.precio | number}}€
+                        </div>
+                        <div>
+                            {{e.fecha | date}}
+                        </div>
                     </div>
-                    <div>
-                        <button class="btn icon-btn p-0 mx-2" data-bs-toggle="modal"
-                            [attr.data-bs-target]="'#modal' + $index"><i class="bi bi-eye"></i></button>
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div>
+                            <button class="btn icon-btn p-0 mx-1" data-bs-toggle="modal"
+                                [attr.data-bs-target]="'#modal' + $index"><i class="bi bi-eye"></i></button>
+                        </div>
                         @if(this.authService.getTokenDescodificado().tipo_usuario == "admin"){
-                        <button class="btn icon-btn text-dark p-0 mx-2" routerLink="/editar-evento/{{ e.idEvento }}">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <button class="btn icon-btn text-dark p-0 mx-2" (click)="borrarEvento(e)">
-                            <i class="bi bi-trash3-fill"></i>
-                        </button>
+                        <div>
+                            <button class="btn icon-btn text-dark p-0 mx-1"
+                                routerLink="/editar-evento/{{ e.idEvento }}">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <button class="btn icon-btn text-dark p-0 mx-1" (click)="borrarEvento(e)">
+                                <i class="bi bi-trash3-fill"></i>
+                            </button>
+                        </div>
                         }
                     </div>
                 </div>
@@ -85,6 +101,7 @@
                                 <p>{{ e.descripcion }}</p>
                                 <p><b>Invitados:</b> {{ e.invitados }}</p>
                                 <p><b>Fecha:</b> {{ e.fecha | date}}</p>
+                                <p><b>Hora:</b> {{ e.hora }}</p>
                                 <p><b>Lugar:</b> {{ e.lugar }}</p>
                                 <p><b>Precio:</b> {{ e.precio | number}}€</p>
                                 <p><b>Teléfono de contacto:</b> {{ e.telefono }}</p>
@@ -98,10 +115,8 @@
         }
 
         @if(this.authService.getTokenDescodificado().tipo_usuario != "consumidor"){
-        <div class="anadir_evento">
-            <a routerLink="/anadir-evento">
-                <i class="bi bi-plus-circle-fill"></i>
-            </a>
+        <div class="icono-anadir-evento">
+            <i class="bi bi-plus-circle-fill" routerLink="/anadir-evento"></i>
         </div>
         }
     </div>
@@ -124,14 +139,20 @@
                     (click)="mostrarEventos('ver_todos_eventos')">Ver todos los eventos</div>
                 <br>
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
                         <i class="bi bi-person-circle"></i>
                     </button>
-                    <div class="dropdown-content">
-                        <a routerLink="/editar-usuario/{{authService.getTokenDescodificado().id}}">Editar perfil</a>
-                        <a (click)="borrarUsuario(authService.getTokenDescodificado().id)">Borrar
-                            perfil</a>
-                    </div>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item"
+                                routerLink="/editar-usuario/{{authService.getTokenDescodificado().id}}">Editar
+                                perfil</a>
+                        </li>
+                        <li><a class="dropdown-item"
+                                (click)="borrarUsuario(authService.getTokenDescodificado().id)">Borrar
+                                perfil</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

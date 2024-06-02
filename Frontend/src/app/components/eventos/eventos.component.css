@@ -24,25 +24,20 @@
 }
 
 /* Posicionamiento del icono de añadir evento */
-.anadir_evento {
-    position: sticky;
-    bottom: 0;
-    right: 0;
+.icono-anadir-evento {
+    font-size: 3rem;
+    color: #fb2f4a;
+    cursor: pointer;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem; 
     z-index: 1000;
-    margin: 1rem;
+    margin: 0;
     text-align: right;
 }
-
-.anadir_evento a {
-    font-size: 3rem;
-    /* Tamaño del icono */
-    color: #fb2f4a;
-    /* Color del icono */
-}
-
-.anadir_evento a:hover {
+  
+.icono-anadir-evento:hover {
     color: #ff0022;
-    /* Color del icono al pasar el cursor */
 }
 
 .menu_activo {
@@ -61,31 +56,6 @@
     border: 0
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-    cursor: pointer
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+.dropdown-item {
+    cursor: pointer;
 }

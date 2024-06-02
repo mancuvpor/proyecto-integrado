@@ -29,9 +29,9 @@ export class FormUsuariosComponent {
 
     this.usuario.id = this.ruta_activa.snapshot.params["id"];
     if (this.usuario.id == null) {
-      this.textoBoton = "Añadir";
+      this.textoBoton = "AÑADIR";
     } else {
-      this.textoBoton = "Modificar";
+      this.textoBoton = "MODIFICAR";
 
       this.usuarioService.getUsuarioPorId(this.usuario.id).subscribe({
         next: res => {
@@ -39,15 +39,14 @@ export class FormUsuariosComponent {
           this.usuario = res
           this.usuario.contrasena = ""
         },
-        error: error => console.log(error)
+        error: error => this.toastr.error(error.error.message, "ERROR")
       })
     }
   }
 
   onSubmit(usuario: Usuario) {
-    console.log("Formulario enviado " + usuario);
+    console.log("Formulario enviado " + usuario.username);
     if (this.usuario.id == null) {
-      usuario.id = this.authService.getTokenDescodificado().id;
       this.usuarioService.crearUsuarios(usuario).subscribe({
         next: (res) => {
           this.toastr.success("Usuario creado correctamente", "Usuario registrado")
@@ -55,7 +54,6 @@ export class FormUsuariosComponent {
         },
         error: error => {
           this.toastr.error(error.error.message, "ERROR")
-          console.log(error)
         }
       })
 
@@ -66,11 +64,11 @@ export class FormUsuariosComponent {
           if (this.authService.getTokenDescodificado().tipo_usuario == "admin") {
             return this.ruta.navigate(['/usuarios']);
           }
-          return this.ruta.navigate(['/eventos']);
+          this.authService.logOut();
+          return this.ruta.navigate(['/login']);
         },
         error: error => {
           this.toastr.error(error.error.message, "ERROR")
-          console.log(error)
         }
       })
     }

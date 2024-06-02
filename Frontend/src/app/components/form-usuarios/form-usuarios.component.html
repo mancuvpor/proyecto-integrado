@@ -1,9 +1,9 @@
 <div id="formUsuario" class="formUsuario">
     <form class="form-horizontal" #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm.value)">
-        <legend>{{textoBoton}} usuario</legend>
+        <legend class="fw-bold">{{textoBoton}} USUARIO</legend>
 
         <div>
-            <label for="username">Username</label>
+            <label for="username" class="form-label">Username</label>
             <input type="text" id="username" class="form-control" required [(ngModel)]="usuario.username"
                 name="username" #username="ngModel" />
             <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
@@ -12,7 +12,7 @@
         </div>
 
         <div>
-            <label for="nombre">Nombre</label>
+            <label for="nombre" class="form-label">Nombre</label>
             <input type="text" id="nombre" class="form-control" required [(ngModel)]="usuario.nombre" name="nombre"
                 #nombre="ngModel" />
             <div [hidden]="nombre.valid || nombre.pristine" class="alert alert-danger">
@@ -21,7 +21,7 @@
         </div>
 
         <div>
-            <label for="apellidos">Apellidos</label>
+            <label for="apellidos" class="form-label">Apellidos</label>
             <input type="text" id="apellidos" class="form-control" required [(ngModel)]="usuario.apellidos"
                 name="apellidos" #apellidos="ngModel" />
             <div [hidden]="apellidos.valid || apellidos.pristine" class="alert alert-danger">
@@ -30,8 +30,8 @@
         </div>
 
         <div>
-            <label for="sexo">Sexo</label>
-            <select id="sexo" class="form-control" required [(ngModel)]="usuario.sexo" name="sexo" #sexo="ngModel">
+            <label for="sexo" class="form-label">Sexo</label>
+            <select id="sexo" class="form-select" required [(ngModel)]="usuario.sexo" name="sexo" #sexo="ngModel">
                 <option value="" disabled selected>Seleccione...</option>
                 <option value="H">H</option>
                 <option value="M">M</option>
@@ -42,7 +42,7 @@
         </div>
 
         <div>
-            <label for="email">Email</label>
+            <label for="email" class="form-label">Email</label>
             <input type="email" id="email" class="form-control" required [(ngModel)]="usuario.email" name="email"
                 #email="ngModel" />
             <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
@@ -51,7 +51,7 @@
         </div>
 
         <div>
-            <label for="contrasena">Contraseña</label>
+            <label for="contrasena" class="form-label">Contraseña</label>
             <input type="password" id="contrasena" class="form-control" required [(ngModel)]="usuario.contrasena"
                 name="contrasena" #contrasena="ngModel" />
             <div [hidden]="contrasena.valid || contrasena.pristine" class="alert alert-danger">
@@ -61,11 +61,13 @@
 
 
         <div>
-            <label for="tipo_usuario">Tipo de usuario</label>
-            <select id="tipo_usuario" class="form-control" required [(ngModel)]="usuario.tipo_usuario"
+            <label for="tipo_usuario" class="form-label">Tipo de usuario</label>
+            <select id="tipo_usuario" class="form-select" required [(ngModel)]="usuario.tipo_usuario"
                 name="tipo_usuario" #tipo_usuario="ngModel">
                 <option value="" disabled selected>Seleccione...</option>
+                @if(this.authService.getTokenDescodificado().tipo_usuario == "admin"){
                 <option value="admin">Admin</option>
+                }
                 <option value="consumidor">Consumidor</option>
                 <option value="ofertante">Ofertante</option>
             </select>
@@ -74,13 +76,13 @@
             </div>
         </div>
 
-        <br />
         <div>
             <button class="btn btn-primary" type="submit" role="button">{{textoBoton}}</button>
+            &nbsp;
             @if(this.authService.getTokenDescodificado().tipo_usuario == "admin"){
-            <a class="btn btn-primary" routerLink="/usuarios" role="button">Cancelar</a>
+            <a class="btn btn-primary" routerLink="/usuarios" role="button">CANCELAR</a>
             } @else {
-            <a class="btn btn-primary" routerLink="/eventos" role="button">Cancelar</a>
+            <a class="btn btn-primary" routerLink="/eventos" role="button">CANCELAR</a>
             }
         </div>
     </form>

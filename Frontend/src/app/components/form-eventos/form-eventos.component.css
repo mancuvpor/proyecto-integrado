@@ -1,0 +1,23 @@
+.formEvento {
+    background-color: #222222;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn{
+    background-color: rgba(255, 0, 38, 0.697);
+    border: 0;
+    padding: 0.75rem;
+}
+
+form {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
